@@ -12,14 +12,16 @@ export function WalletConnect() {
   const [publicKey, setPublicKey] = useState<string>('')
 
   useEffect(() => {
-    if ("phantom" in window) {
+    if (typeof window !== 'undefined' && "phantom" in window) {
       const phantomWindow = window as PhantomWindow
-      const provider = phantomWindow.phantom?.solana
-      if (provider?.isPhantom) {
-        setProvider(provider)
-        // Attempt to eagerly connect
-        provider.connect({ onlyIfTrusted: true }).catch(() => {
-          // Handle connection failure silently for eager connect
+      const phantomProvider = phantomWindow.phantom?.solana
+      
+      if (phantomProvider?.isPhantom) {
+        setProvider(phantomProvider)
+
+        // Attempt to eagerly connect (no arguments for connect method)
+        phantomProvider.connect().catch(() => {
+          // Handle silent failure on eager connection
         })
       }
     }
@@ -27,17 +29,17 @@ export function WalletConnect() {
 
   useEffect(() => {
     if (provider) {
-      provider.on('connect', (publicKey: { toString: () => string }) => {
+      const handleConnect = (publicKey: { toString: () => string }) => {
         setConnected(true)
         setPublicKey(publicKey.toString())
-      })
+      }
 
-      provider.on('disconnect', () => {
+      const handleDisconnect = () => {
         setConnected(false)
         setPublicKey('')
-      })
+      }
 
-      provider.on('accountChanged', (publicKey: { toString: () => string } | null) => {
+      const handleAccountChanged = (publicKey: { toString: () => string } | null) => {
         if (publicKey) {
           setConnected(true)
           setPublicKey(publicKey.toString())
@@ -45,7 +47,18 @@ export function WalletConnect() {
           setConnected(false)
           setPublicKey('')
         }
-      })
+      }
+
+      provider.on('connect', handleConnect)
+      provider.on('disconnect', handleDisconnect)
+      provider.on('accountChanged', handleAccountChanged)
+
+      // Cleanup listeners on unmount
+      return () => {
+        provider.removeListener('connect', handleConnect)
+        provider.removeListener('disconnect', handleDisconnect)
+        provider.removeListener('accountChanged', handleAccountChanged)
+      }
     }
   }, [provider])
 
@@ -53,7 +66,7 @@ export function WalletConnect() {
     try {
       setLoading(true)
       if (!provider) {
-        window.open('https://phantom.app/', '_blank')
+        window.open('https://phantom.app/', '_blank', 'noopener noreferrer')
         return
       }
       await provider.connect()
@@ -86,8 +99,12 @@ export function WalletConnect() {
       disabled={loading}
     >
       <Wallet className="w-5 h-5 mr-2" />
-      {loading ? 'Loading...' : connected ? `Connected: ${publicKey.slice(0, 4)}...${publicKey.slice(-4)}` : 'Connect Wallet'}
+      {loading 
+        ? 'Loading...' 
+        : connected 
+          ? `Connected: ${publicKey.slice(0, 4)}...${publicKey.slice(-4)}` 
+          : 'Connect Wallet'
+      }
     </Button>
   )
 }
-
