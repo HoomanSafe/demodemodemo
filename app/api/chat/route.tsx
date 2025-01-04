@@ -1,32 +1,27 @@
-import { openai } from '@ai-sdk/openai';
-import { streamText } from 'ai';
+import { streamText } from 'ai'
+import { openai } from '@ai-sdk/openai'
 
-export const runtime = 'nodejs';
+// Set the runtime to edge for better performance
+export const runtime = 'edge'
 
 export async function POST(req: Request) {
   try {
-    // Validate that we have an API key
-    if (!process.env.OPENAI_API_KEY) {
-      return new Response('OpenAI API key not configured', { status: 500 });
-    }
+    const { messages } = await req.json()
 
-    const { messages } = await req.json();
-    
-    // Validate messages
-    if (!messages || !Array.isArray(messages)) {
-      return new Response('Invalid messages format', { status: 400 });
-    }
-
-    const result = await streamText({
-      model: openai('gpt-4-turbo'),
+    // Create a stream using the AI SDK
+    const result = streamText({
+      model: openai('gpt-3.5-turbo'),
       messages,
-      system: "You are Genius AI, an advanced AI assistant focused on helping users with trading and cryptocurrency. Be concise and professional in your responses.",
-    });
+      system: "You are Genius AI, an advanced artificial intelligence assistant focused on providing clear and accurate responses about trading, cryptocurrency, and technology. Be professional yet engaging in your responses.",
+    })
 
-    return result.toDataStreamResponse();
+    // Return the stream response
+    return result.toDataStreamResponse()
   } catch (error: any) {
-    console.error('Chat API error:', error);
-    return new Response(error.message || 'An error occurred', { status: 500 });
+    return new Response(
+      JSON.stringify({ error: error.message || 'An error occurred' }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
+    )
   }
 }
 

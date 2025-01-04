@@ -44,23 +44,17 @@ export default function Chat() {
       <div className="relative z-10 flex flex-col items-center p-4 max-w-6xl mx-auto">
         {/* Header */}
         <div className="w-full text-center mb-12 pt-8">
-  <div className="flex justify-center items-center gap-2 mb-4">
-    <h1 className="text-4xl font-bold">AIBlockX</h1>
-    
-      <img 
-        src="logo.png" 
-        alt="Bot Icon" 
-        className="w-8 h-8"
-      />
-    
-  
-</div>
-
-          <h2 className="text-3xl font-bold mb-4">Experience AIBlockX</h2>
+          <div className="flex justify-center items-center gap-2 mb-4">
+            <h1 className="text-4xl font-bold">GENIUS AI</h1>
+            <div className="w-[60px] h-[60px] rounded-full bg-purple-600 flex items-center justify-center">
+              <Bot className="w-8 h-8" />
+            </div>
+          </div>
+          <h2 className="text-3xl font-bold mb-4">Experience Genius AI</h2>
           <p className="text-purple-300 mb-6">
-            Try AIBlockX today and see how automated intelligence can transform your trading game.
+            Try GENIUS today and see how automated intelligence can transform your trading game.
             <br />
-            Early users will be rewarded with $AIBlockX Airdrop.
+            Early users will be rewarded with $GENIUS Airdrop.
           </p>
           <WalletConnect />
         </div>
@@ -128,7 +122,6 @@ export default function Chat() {
             </form>
           </div>
         </Card>
-
         {/* Features Section */}
         <div className="w-full">
           <h3 className="text-2xl font-bold text-center mb-8">Advanced Features</h3>
