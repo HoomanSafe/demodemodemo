@@ -1,24 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-
+import { Wallet } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-
-type PhantomEvent = "disconnect" | "connect" | "accountChanged"
-
-interface PhantomProvider {
-  connect: () => Promise<{ publicKey: string }>
-  disconnect: () => Promise<void>
-  on: (event: PhantomEvent, callback: (args: any) => void) => void
-  isPhantom: boolean
-  isConnected: boolean
-}
-
-interface Window {
-  phantom?: {
-    solana?: PhantomProvider
-  }
-}
+import { type PhantomProvider, type PhantomWindow, type WalletError } from '../types/wallet'
 
 export function WalletConnect() {
   const [provider, setProvider] = useState<PhantomProvider | null>(null)
@@ -28,12 +13,13 @@ export function WalletConnect() {
 
   useEffect(() => {
     if ("phantom" in window) {
-      const provider = (window as any).phantom?.solana
+      const phantomWindow = window as PhantomWindow
+      const provider = phantomWindow.phantom?.solana
       if (provider?.isPhantom) {
         setProvider(provider)
         // Attempt to eagerly connect
         provider.connect({ onlyIfTrusted: true }).catch(() => {
-          // Handle connection failure
+          // Handle connection failure silently for eager connect
         })
       }
     }
@@ -72,7 +58,8 @@ export function WalletConnect() {
       }
       await provider.connect()
     } catch (error) {
-      console.error('Error connecting to wallet:', error)
+      const walletError = error as WalletError
+      console.error('Error connecting to wallet:', walletError.message)
     } finally {
       setLoading(false)
     }
@@ -85,7 +72,8 @@ export function WalletConnect() {
         await provider.disconnect()
       }
     } catch (error) {
-      console.error('Error disconnecting wallet:', error)
+      const walletError = error as WalletError
+      console.error('Error disconnecting wallet:', walletError.message)
     } finally {
       setLoading(false)
     }
@@ -97,14 +85,9 @@ export function WalletConnect() {
       className="bg-purple-600 hover:bg-purple-700 transition-colors"
       disabled={loading}
     >
-      <img 
-        src="phantom.png" 
-        alt="Wallet Icon" 
-        className="w-5 h-5 mr-2"
-      />
+      <Wallet className="w-5 h-5 mr-2" />
       {loading ? 'Loading...' : connected ? `Connected: ${publicKey.slice(0, 4)}...${publicKey.slice(-4)}` : 'Connect Wallet'}
     </Button>
   )
-  
 }
 

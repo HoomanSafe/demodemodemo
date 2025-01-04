@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -15,10 +16,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
-      </head>
-      <body className={`${inter.className} bg-black`}>{children}</body>
+      <body className={`${inter.className} bg-black`}>
+        {children}
+        <Script
+          src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"
+          strategy="lazyOnload"
+        />
+      </body>
     </html>
   )
 }
