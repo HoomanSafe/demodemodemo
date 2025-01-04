@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Wallet } from 'lucide-react'
+
 import { Button } from "@/components/ui/button"
 
 type PhantomEvent = "disconnect" | "connect" | "accountChanged"
