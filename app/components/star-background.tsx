@@ -16,59 +16,64 @@ export function StarBackground() {
     const canvas = canvasRef.current
     if (!canvas) return
 
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    const context = canvas.getContext('2d')
+    if (!context) return
 
-    // Set canvas size
+    let animationFrameId: number
+    const stars: Star[] = []
+    const numStars = 100
+
     const resizeCanvas = () => {
       if (!canvas) return
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
     }
-    resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
 
-    // Star properties
-    const stars: Star[] = []
-    const numStars = 100
-
-    // Initialize stars
-    for (let i = 0; i < numStars; i++) {
-      stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2,
-        speed: Math.random() * 0.5
-      })
+    const createStars = () => {
+      stars.length = 0
+      for (let i = 0; i < numStars; i++) {
+        stars.push({
+          x: Math.random() * (canvas?.width ?? 0),
+          y: Math.random() * (canvas?.height ?? 0),
+          size: Math.random() * 2,
+          speed: Math.random() * 0.5
+        })
+      }
     }
 
-    // Animation
-    let animationFrameId: number
+    const animate = () => {
+      if (!canvas || !context) return
 
-    function animate() {
-      if (!canvas || !ctx) return
-
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      context.fillStyle = 'rgba(0, 0, 0, 0.1)'
+      context.fillRect(0, 0, canvas.width, canvas.height)
 
       stars.forEach(star => {
-        ctx.fillStyle = 'rgba(147, 51, 234, 0.8)'
-        ctx.beginPath()
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2)
-        ctx.fill()
+        if (!context) return
+        context.fillStyle = 'rgba(147, 51, 234, 0.8)'
+        context.beginPath()
+        context.arc(star.x, star.y, star.size, 0, Math.PI * 2)
+        context.fill()
 
-        // Move star
         star.y += star.speed
-        if (star.y > canvas.height) {
+        if (star.y > (canvas?.height ?? 0)) {
           star.y = 0
-          star.x = Math.random() * canvas.width
+          star.x = Math.random() * (canvas?.width ?? 0)
         }
       })
 
       animationFrameId = requestAnimationFrame(animate)
     }
 
+    // Initialize
+    resizeCanvas()
+    createStars()
     animate()
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      resizeCanvas()
+      createStars()
+    })
 
     // Cleanup
     return () => {
