@@ -45,7 +45,7 @@ export default function Chat() {
         {/* Header */}
         <div className="w-full text-center mb-12 pt-8">
           <div className="flex justify-center items-center gap-2 mb-4">
-            <h1 className="text-4xl font-bold">GENIUS AI</h1>
+            <h1 className="text-4xl font-bold">AIBLOCKX</h1>
             <div className="w-[60px] h-[60px] rounded-full bg-purple-600 flex items-center justify-center">
               <Bot className="w-8 h-8" />
             </div>
