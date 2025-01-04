@@ -29,7 +29,8 @@ export function WalletConnect() {
 
   useEffect(() => {
     if (provider) {
-      const handleConnect = (publicKey: { toString: () => string }) => {
+      const handleConnect = (key: unknown) => {
+        const publicKey = key as { toString: () => string }
         setConnected(true)
         setPublicKey(publicKey.toString())
       }
@@ -39,7 +40,8 @@ export function WalletConnect() {
         setPublicKey('')
       }
 
-      const handleAccountChanged = (publicKey: { toString: () => string } | null) => {
+      const handleAccountChanged = (key: unknown) => {
+        const publicKey = key as { toString: () => string } | null
         if (publicKey) {
           setConnected(true)
           setPublicKey(publicKey.toString())
