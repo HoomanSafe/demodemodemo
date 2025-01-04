@@ -2,6 +2,13 @@
 
 import { useEffect, useRef } from 'react'
 
+interface Star {
+  x: number
+  y: number
+  size: number
+  speed: number
+}
+
 export function StarBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -14,6 +21,7 @@ export function StarBackground() {
 
     // Set canvas size
     const resizeCanvas = () => {
+      if (!canvas) return
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
     }
@@ -21,7 +29,7 @@ export function StarBackground() {
     window.addEventListener('resize', resizeCanvas)
 
     // Star properties
-    const stars: { x: number; y: number; size: number; speed: number }[] = []
+    const stars: Star[] = []
     const numStars = 100
 
     // Initialize stars
@@ -35,7 +43,11 @@ export function StarBackground() {
     }
 
     // Animation
+    let animationFrameId: number
+
     function animate() {
+      if (!canvas || !ctx) return
+
       ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
@@ -53,13 +65,17 @@ export function StarBackground() {
         }
       })
 
-      requestAnimationFrame(animate)
+      animationFrameId = requestAnimationFrame(animate)
     }
 
     animate()
 
+    // Cleanup
     return () => {
       window.removeEventListener('resize', resizeCanvas)
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId)
+      }
     }
   }, [])
 
@@ -67,6 +83,7 @@ export function StarBackground() {
     <canvas
       ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full pointer-events-none"
+      aria-hidden="true"
     />
   )
 }
