@@ -55,11 +55,13 @@ export function WalletConnect() {
       provider.on('disconnect', handleDisconnect)
       provider.on('accountChanged', handleAccountChanged)
 
-      // Cleanup listeners on unmount
+      // Cleanup listeners on unmount (if 'off' is supported)
       return () => {
-        provider.removeListener('connect', handleConnect)
-        provider.removeListener('disconnect', handleDisconnect)
-        provider.removeListener('accountChanged', handleAccountChanged)
+        if (provider.off) {
+          provider.off('connect', handleConnect)
+          provider.off('disconnect', handleDisconnect)
+          provider.off('accountChanged', handleAccountChanged)
+        }
       }
     }
   }, [provider])
