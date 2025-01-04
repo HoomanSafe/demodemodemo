@@ -170,7 +170,7 @@ export default function Chat() {
               protocols ensure the utmost security and immutability of 
               user data and transactions.
  Transparent audit trails that guarantee trust and accountability within 
- the ecosystem."
+ the ecosystems."
               icon="packed"
             />
           </div>
