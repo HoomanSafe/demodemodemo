@@ -50,11 +50,11 @@ export default function Chat() {
               <Bot className="w-8 h-8" />
             </div>
           </div>
-          <h2 className="text-3xl font-bold mb-4">Experience Genius AI</h2>
+          <h2 className="text-3xl font-bold mb-4">Experience AIBLOCKX AI</h2>
           <p className="text-purple-300 mb-6">
-            Try GENIUS today and see how automated intelligence can transform your trading game.
+            Try AIBLOCKX today and see how automated intelligence can transform your trading game.
             <br />
-            Early users will be rewarded with $GENIUS Airdrop.
+            Early users will be rewarded with $AIBLOCKX Airdrop.
           </p>
           <WalletConnect />
         </div>

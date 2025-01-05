@@ -1,22 +1,28 @@
 export interface PhantomWindow extends Window {
-    phantom?: {
-      solana?: PhantomProvider
-    }
+  phantom?: {
+    solana?: PhantomProvider
   }
-  
-  export type PhantomEvent = "disconnect" | "connect" | "accountChanged"
-  
-  export interface PhantomProvider {
-    connect: () => Promise<{ publicKey: { toString: () => string } }>
-    disconnect: () => Promise<void>
-    on: (event: PhantomEvent, callback: (args: unknown) => void) => void
-    isPhantom: boolean
-    isConnected: boolean
-  }
-  
-  export interface WalletError extends Error {
-    code?: number
-    message: string
-  }
-  
-  
+}
+
+export interface PublicKey {
+  toString: () => string
+}
+
+export interface PhantomProvider {
+  isPhantom?: boolean
+  publicKey?: PublicKey | null
+  isConnected?: boolean
+  signTransaction?: (transaction: unknown) => Promise<unknown>
+  signAllTransactions?: (transactions: unknown[]) => Promise<unknown[]>
+  signMessage?: (message: unknown) => Promise<unknown>
+  connect: (opts?: { onlyIfTrusted?: boolean }) => Promise<{ publicKey: PublicKey }>
+  disconnect: () => Promise<void>
+  on: (event: string, handler: (args: unknown) => void) => void
+  removeListener: (event: string, handler: (args: unknown) => void) => void
+}
+
+export interface WalletError extends Error {
+  code?: number
+  message: string
+}
+

@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Wallet } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import { type PhantomProvider, type PhantomWindow, type WalletError } from '../types/wallet'
+import { type PhantomProvider, type PhantomWindow, type WalletError, type PublicKey } from '../types/wallet'
 
 export function WalletConnect() {
   const [provider, setProvider] = useState<PhantomProvider | null>(null)
@@ -15,56 +15,52 @@ export function WalletConnect() {
     if (typeof window !== 'undefined' && "phantom" in window) {
       const phantomWindow = window as PhantomWindow
       const phantomProvider = phantomWindow.phantom?.solana
-      
+
       if (phantomProvider?.isPhantom) {
         setProvider(phantomProvider)
 
-        // Attempt to eagerly connect (no arguments for connect method)
-        phantomProvider.connect().catch(() => {
-          // Handle silent failure on eager connection
+        phantomProvider.connect({ onlyIfTrusted: true }).catch(() => {
+          // Silent failure for eager connect
         })
       }
     }
   }, [])
 
-  useEffect(() => {
-    if (provider) {
-      const handleConnect = (key: unknown) => {
-        const publicKey = key as { toString: () => string }
-        setConnected(true)
-        setPublicKey(publicKey.toString())
-      }
+  const handleConnect = useCallback((key: unknown) => {
+    const publicKey = key as PublicKey
+    setConnected(true)
+    setPublicKey(publicKey.toString())
+  }, [])
 
-      const handleDisconnect = () => {
-        setConnected(false)
-        setPublicKey('')
-      }
+  const handleDisconnect = useCallback(() => {
+    setConnected(false)
+    setPublicKey('')
+  }, [])
 
-      const handleAccountChanged = (key: unknown) => {
-        const publicKey = key as { toString: () => string } | null
-        if (publicKey) {
-          setConnected(true)
-          setPublicKey(publicKey.toString())
-        } else {
-          setConnected(false)
-          setPublicKey('')
-        }
-      }
-
-      provider.on('connect', handleConnect)
-      provider.on('disconnect', handleDisconnect)
-      provider.on('accountChanged', handleAccountChanged)
-
-      // Cleanup listeners on unmount (if 'off' is supported)
-      return () => {
-        if (provider.off) {
-          provider.off('connect', handleConnect)
-          provider.off('disconnect', handleDisconnect)
-          provider.off('accountChanged', handleAccountChanged)
-        }
-      }
+  const handleAccountChanged = useCallback((key: unknown) => {
+    const publicKey = key as PublicKey | null
+    if (publicKey) {
+      setConnected(true)
+      setPublicKey(publicKey.toString())
+    } else {
+      setConnected(false)
+      setPublicKey('')
     }
-  }, [provider])
+  }, [])
+
+  useEffect(() => {
+    if (!provider) return
+
+    provider.on('connect', handleConnect)
+    provider.on('disconnect', handleDisconnect)
+    provider.on('accountChanged', handleAccountChanged)
+
+    return () => {
+      provider.removeListener('connect', handleConnect)
+      provider.removeListener('disconnect', handleDisconnect)
+      provider.removeListener('accountChanged', handleAccountChanged)
+    }
+  }, [provider, handleConnect, handleDisconnect, handleAccountChanged])
 
   const connectWallet = async () => {
     try {
@@ -112,3 +108,4 @@ export function WalletConnect() {
     </Button>
   )
 }
+
