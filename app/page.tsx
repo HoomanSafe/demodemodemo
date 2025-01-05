@@ -1,14 +1,17 @@
 'use client'
 
 import { useChat } from 'ai/react'
-import { Send, Bot } from 'lucide-react'
+import { Send, Bot, ArrowRight } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
 import { StarBackground } from './components/star-background'
 import { FeatureCard } from './components/feature-card'
 import { WalletConnect } from './components/wallet-connect'
+import { TokenUtility } from './components/token-utility'
+import { RoadmapSection } from './components/roadmap'
 import { useEffect, useRef } from 'react'
+import { SocialLinks } from './components/social-links'
 
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
@@ -43,9 +46,11 @@ export default function Chat() {
       
       <div className="relative z-10 flex flex-col items-center p-4 max-w-6xl mx-auto">
         {/* Header */}
-        <div className="w-full text-center mb-12 pt-8">
+        <div className="w-full text-center mb-12 pt-8 animate-fade-in">
           <div className="flex justify-center items-center gap-2 mb-4">
-            <h1 className="text-4xl font-bold">AIBLOCKX</h1>
+            <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-600">
+              AIBLOCKX
+            </h1>
             <div className="w-[60px] h-[60px] rounded-full bg-purple-600 flex items-center justify-center">
               <Bot className="w-8 h-8" />
             </div>
@@ -57,10 +62,13 @@ export default function Chat() {
             Early users will be rewarded with $AIBLOCKX Airdrop.
           </p>
           <WalletConnect />
+          <div className="mt-4">
+            <SocialLinks xUsername="aiblockx" telegramGroup="aiblockx" />
+          </div>
         </div>
 
         {/* Chat Interface */}
-        <Card className="w-full max-w-2xl bg-[#1a1a2e]/80 backdrop-blur-sm border-purple-500/20 text-white mb-12">
+        <Card className="w-full max-w-2xl bg-[#1a1a2e]/80 backdrop-blur-sm border-purple-500/20 text-white mb-12 animate-fade-in">
           <div className="h-[300px] overflow-y-auto p-4 space-y-4">
             {messages.map(message => (
               <div
@@ -122,6 +130,7 @@ export default function Chat() {
             </form>
           </div>
         </Card>
+
         {/* Features Section */}
         <div className="w-full">
           <h3 className="text-2xl font-bold text-center mb-8">Advanced Features</h3>
@@ -141,32 +150,40 @@ export default function Chat() {
               description="Sophisticated deep learning algorithms that evolve and improve over time."
               icon="network"
             />
-              <FeatureCard
+            <FeatureCard
               title="AI-Powered Predictive Analytics"
-              description="Gain actionable insights through powerful AI models that analyze trends,
-               predict market movements, and optimize investment strategies.
-               Real-time data processing to deliver accurate forecasts f
-               or market behavior and asset performance."
+              description="Gain actionable insights through powerful AI models that analyze trends, predict market movements, and optimize investment strategies."
               icon="botmessagesquare"
             />
             <FeatureCard
               title="Decentralized Automated Trading"
-              description="Utilize AI-powered trading bots integrated with blockchain smart contracts 
-              for automated, transparent, and efficient trading strategies.
-              Customizable parameters for both beginners and advanced traders to 
-              optimize returns."
+              description="Utilize AI-powered trading bots integrated with blockchain smart contracts for automated, transparent, and efficient trading strategies."
               icon="chart"
             />
             <FeatureCard
               title="Data Privacy and Security"
-              description="Advanced encryption and blockchain verification 
-              protocols ensure the utmost security and immutability of 
-              user data and transactions.
- Transparent audit trails that guarantee trust and accountability within 
- the ecosystems."
+              description="Advanced encryption and blockchain verification protocols ensure the utmost security and immutability of user data and transactions."
               icon="packed"
             />
           </div>
+        </div>
+
+        {/* Token Utility Section */}
+        <TokenUtility />
+
+        {/* Roadmap Section */}
+        <RoadmapSection />
+
+        {/* Call to Action */}
+        <div className="w-full text-center py-16 animate-fade-in">
+          <h2 className="text-3xl font-bold mb-4">Join the AIBLOCKX Revolution!</h2>
+          <p className="text-lg text-purple-300 mb-8">
+            Be part of a smarter, more transparent, and decentralized future powered by AI and blockchain technology.
+          </p>
+          <Button className="bg-purple-600 hover:bg-purple-700 transition-colors">
+            Get Started
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
         </div>
       </div>
     </div>
