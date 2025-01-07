@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
 import { StarBackground } from './components/star-background'
 import { FeatureCard } from './components/feature-card'
-import { WalletConnect } from './components/wallet-connect'
+
 import { TokenUtility } from './components/token-utility'
 import { RoadmapSection } from './components/roadmap'
 import { useEffect, useRef } from 'react'
