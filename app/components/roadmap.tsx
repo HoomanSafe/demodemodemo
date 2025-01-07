@@ -5,7 +5,7 @@ export function RoadmapSection() {
     {
       quarter: 'Q1 2025',
       items: [
-        'Launch of AIBLOCKX MVP',
+        'Launch of OPERATOR MVP',
         'Beta testing for predictive analytics tools'
       ]
     },
@@ -13,7 +13,7 @@ export function RoadmapSection() {
       quarter: 'Q2 2025',
       items: [
         'Integration with multiple blockchain networks',
-        'Introduction of AIBLOCKX token staking'
+        'Introduction of OPERATOR token staking'
       ]
     },
     {

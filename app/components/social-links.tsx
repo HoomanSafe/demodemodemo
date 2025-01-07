@@ -8,8 +8,8 @@ interface SocialLinksProps {
 }
 
 export function SocialLinks({ 
-  xUsername = "aiblockx", 
-  telegramGroup = "aiblockx" 
+  xUsername = "OPENAI_2025", 
+  telegramGroup = "OPENAI_2025" 
 }: SocialLinksProps) {
   return (
     <div className="flex gap-4 items-center justify-center">

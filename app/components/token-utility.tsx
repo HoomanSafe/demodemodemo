@@ -6,17 +6,17 @@ export function TokenUtility() {
     {
       icon: Lock,
       title: 'Access Premium Features',
-      description: 'Use AIBLOCKX tokens to access premium AI analytics tools and advanced trading features'
+      description: 'Use OPERATOR tokens to access premium AI analytics tools and advanced trading features'
     },
     {
       icon: Coins,
       title: 'Stake for Rewards',
-      description: 'Earn passive income by staking your AIBLOCKX tokens in the platform'
+      description: 'Earn passive income by staking your OPERATOR tokens in the platform'
     },
     {
       icon: Users,
       title: 'Governance Rights',
-      description: 'Participate in platform governance and shape the future of AIBLOCKX'
+      description: 'Participate in platform governance and shape the future of OPERATOR'
     }
   ]
 
@@ -25,7 +25,7 @@ export function TokenUtility() {
       <div className="text-center mb-12 animate-fade-in">
         <h2 className="text-3xl font-bold">Token Utility</h2>
         <p className="mt-4 text-lg text-purple-300">
-          The AIBLOCKX token powers our ecosystem and provides valuable benefits to holders
+          The OPERATOR token powers our ecosystem and provides valuable benefits to holders
         </p>
       </div>
 

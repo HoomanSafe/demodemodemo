@@ -49,21 +49,21 @@ export default function Chat() {
         <div className="w-full text-center mb-12 pt-8 animate-fade-in">
           <div className="flex justify-center items-center gap-2 mb-4">
             <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-600">
-              AIBLOCKX
+              OPERATOR
             </h1>
             <div className="w-[60px] h-[60px] rounded-full bg-purple-600 flex items-center justify-center">
               <Bot className="w-8 h-8" />
             </div>
           </div>
-          <h2 className="text-3xl font-bold mb-4">Experience AIBLOCKX AI</h2>
+          <h2 className="text-3xl font-bold mb-4">Experience OPERATOR AI</h2>
           <p className="text-purple-300 mb-6">
-            Try AIBLOCKX today and see how automated intelligence can transform your trading game.
+            Try OPERATOR today and see how automated intelligence can transform your trading game.
             <br />
-            Early users will be rewarded with $AIBLOCKX Airdrop.
+            Early users will be rewarded with $OPERATOR Airdrop.
           </p>
-          <WalletConnect />
+          
           <div className="mt-4">
-            <SocialLinks xUsername="aiblockx" telegramGroup="aiblockx" />
+            <SocialLinks xUsername="OpenAi_2025" telegramGroup="OpenAi_2025" />
           </div>
         </div>
 
@@ -176,7 +176,7 @@ export default function Chat() {
 
         {/* Call to Action */}
         <div className="w-full text-center py-16 animate-fade-in">
-          <h2 className="text-3xl font-bold mb-4">Join the AIBLOCKX Revolution!</h2>
+          <h2 className="text-3xl font-bold mb-4">Join the OPERATOR Revolution!</h2>
           <p className="text-lg text-purple-300 mb-8">
             Be part of a smarter, more transparent, and decentralized future powered by AI and blockchain technology.
           </p>
