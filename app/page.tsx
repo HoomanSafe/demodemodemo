@@ -178,7 +178,7 @@ export default function Chat() {
         <div className="w-full text-center py-16 animate-fade-in">
           <h2 className="text-3xl font-bold mb-4">Join the OPERATOR Revolution!</h2>
           <p className="text-lg text-purple-300 mb-8">
-            Be part of a smarter, more transparent, and decentralized future powered by AI and blockchain technology.
+            Be part of a smarter, more transparent!, and decentralized future powered by AI and blockchain technology.
           </p>
           <Button className="bg-purple-600 hover:bg-purple-700 transition-colors">
             Get Started
