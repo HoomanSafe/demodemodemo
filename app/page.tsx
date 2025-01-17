@@ -47,43 +47,48 @@ export default function Chat() {
       <div className="relative z-10 flex flex-col items-center p-4 max-w-6xl mx-auto">
         {/* Header */}
         <div className="w-full text-center mb-12 pt-8 animate-fade-in">
-          <div className="flex justify-center items-center gap-2 mb-4">
-            <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-600">
-              OPERATOR
-            </h1>
-            <div className="w-[60px] h-[60px] rounded-full bg-purple-600 flex items-center justify-center">
-              <Bot className="w-8 h-8" />
-            </div>
-          </div>
-          <h2 className="text-3xl font-bold mb-4">Experience OPERATOR AI</h2>
-          <p className="text-purple-300 mb-6">
-            Try OPERATOR today and see how automated intelligence can transform your trading game.
+        <div className="flex justify-center items-center gap-2 mb-4">
+  <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">
+    VIRTU
+  </h1>
+  <div className="w-[60px] h-[60px] rounded-full bg-gray-600 flex items-center justify-center">
+    <img
+      src="/virtulogo.png" // Update this path to your local image location
+      alt="Local Image"
+      className="w-8 h-8"
+    />
+  </div>
+</div>
+
+          <h2 className="text-3xl font-bold mb-4">Experience VIRTU AI</h2>
+          <p className="text-green-300 mb-6">
+            Try VIRTU today and see how automated intelligence can transform your trading game.
             <br />
-            Early users will be rewarded with $OPERATOR Airdrop.
+            Early users will be rewarded with $VIRTU.
           </p>
           
           <div className="mt-4">
-            <SocialLinks xUsername="OpenAi_2025" telegramGroup="OpenAi_2025" />
+            <SocialLinks xUsername="virtuaisol" telegramGroup="virtuaisol" />
           </div>
         </div>
 
         {/* Chat Interface */}
-        <Card className="w-full max-w-2xl bg-[#1a1a2e]/80 backdrop-blur-sm border-purple-500/20 text-white mb-12 animate-fade-in">
+        <Card className="w-full max-w-2xl bg-[#1a1a2e]/80 backdrop-blur-sm border-green-500/20 text-white mb-12 animate-fade-in">
           <div className="h-[300px] overflow-y-auto p-4 space-y-4">
             {messages.map(message => (
               <div
                 key={message.id}
                 className={`flex items-start gap-3 ${
-                  message.role === 'assistant' ? 'text-purple-300' : 'text-white'
+                  message.role === 'assistant' ? 'text-green-300' : 'text-white'
                 }`}
               >
                 {message.role === 'assistant' && (
-                  <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center flex-shrink-0">
                     <Bot className="w-5 h-5" />
                   </div>
                 )}
                 <div className={`flex-1 px-4 py-2 rounded-lg ${
-                  message.role === 'assistant' ? 'bg-purple-500/10' : 'bg-purple-600/20'
+                  message.role === 'assistant' ? 'bg-green-500/10' : 'bg-green-600/20'
                 }`}>
                   {message.content}
                 </div>
@@ -91,14 +96,14 @@ export default function Chat() {
             ))}
             {isLoading && (
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center">
                   <Bot className="w-5 h-5 animate-pulse" />
                 </div>
-                <div className="flex-1 px-4 py-2 rounded-lg bg-purple-500/10">
+                <div className="flex-1 px-4 py-2 rounded-lg bg-green-500/10">
                   <div className="flex gap-2">
-                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" />
-                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce [animation-delay:0.2s]" />
-                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce [animation-delay:0.4s]" />
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" />
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce [animation-delay:0.2s]" />
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce [animation-delay:0.4s]" />
                   </div>
                 </div>
               </div>
@@ -112,17 +117,17 @@ export default function Chat() {
           </div>
 
           {/* Input Form */}
-          <div className="border-t border-purple-500/20 p-4">
+          <div className="border-t border-green-500/20 p-4">
             <form onSubmit={handleFormSubmit} className="flex gap-2">
               <Input
                 value={input}
                 onChange={handleInputChange}
                 placeholder="Type your message..."
-                className="flex-1 bg-purple-500/10 border-purple-500/20 text-white placeholder:text-purple-300/50"
+                className="flex-1 bg-green-500/10 border-green-500/20 text-white placeholder:text-green-300/50"
               />
               <Button 
                 type="submit" 
-                className="bg-purple-600 hover:bg-purple-700"
+                className="bg-green-600 hover:bg-green-700"
                 disabled={isLoading || input.trim() === ''}
               >
                 <Send className="w-4 h-4" />
@@ -176,11 +181,11 @@ export default function Chat() {
 
         {/* Call to Action */}
         <div className="w-full text-center py-16 animate-fade-in">
-          <h2 className="text-3xl font-bold mb-4">Join the OPERATOR Revolution!</h2>
-          <p className="text-lg text-purple-300 mb-8">
+          <h2 className="text-3xl font-bold mb-4">Join the VIRTU Revolution!</h2>
+          <p className="text-lg text-green-300 mb-8">
             Be part of a smarter, more transparent!, and decentralized future powered by AI and blockchain technology.
           </p>
-          <Button className="bg-purple-600 hover:bg-purple-700 transition-colors">
+          <Button className="bg-green-600 hover:bg-green-700 transition-colors">
             Get Started
             <ArrowRight className="ml-2 w-5 h-5" />
           </Button>

@@ -49,7 +49,7 @@ export function StarBackground() {
 
       stars.forEach(star => {
         if (!context) return
-        context.fillStyle = 'rgba(147, 51, 234, 0.8)'
+        context.fillStyle = 'rgba(51, 234, 69, 0.8)'
         context.beginPath()
         context.arc(star.x, star.y, star.size, 0, Math.PI * 2)
         context.fill()

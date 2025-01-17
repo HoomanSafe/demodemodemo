@@ -8,14 +8,14 @@ interface SocialLinksProps {
 }
 
 export function SocialLinks({ 
-  xUsername = "OPENAI_2025", 
-  telegramGroup = "OPENAI_2025" 
+  xUsername = "virtuaisol", 
+  telegramGroup = "virtuaisol" 
 }: SocialLinksProps) {
   return (
     <div className="flex gap-4 items-center justify-center">
       <Button
         variant="ghost"
-        className="bg-[#1a1a2e]/80 hover:bg-[#1a1a2e] text-white hover:text-purple-400 transition-colors"
+        className="bg-[#1a1a2e]/80 hover:bg-[#1a1a2e] text-white hover:text-green-400 transition-colors"
         onClick={() => window.open(`https://x.com/${xUsername}`, '_blank')}
       >
         <svg
@@ -30,7 +30,7 @@ export function SocialLinks({
 
       <Button
         variant="ghost"
-        className="bg-[#1a1a2e]/80 hover:bg-[#1a1a2e] text-white hover:text-purple-400 transition-colors"
+        className="bg-[#1a1a2e]/80 hover:bg-[#1a1a2e] text-white hover:text-green-400 transition-colors"
         onClick={() => window.open(`https://t.me/${telegramGroup}`, '_blank')}
       >
         <svg
