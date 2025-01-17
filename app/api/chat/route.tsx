@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     const result = streamText({
       model: openai('gpt-3.5-turbo'),
       messages,
-      system: "You are Genius AI, an advanced artificial intelligence assistant focused on providing clear and accurate responses about trading, cryptocurrency, and technology. Be professional yet engaging in your responses.",
+      system: "You are VIRTU AI, an advanced artificial intelligence assistant focused on providing clear and accurate responses about trading, cryptocurrency, and technology. Be professional yet engaging in your responses.",
     })
 
     return result.toDataStreamResponse()
