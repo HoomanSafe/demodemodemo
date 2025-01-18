@@ -68,7 +68,7 @@ export default function Chat() {
           </p>
           
           <div className="mt-4">
-            <SocialLinks xUsername="virtuaisol" telegramGroup="virtuaisol" />
+            <SocialLinks xUsername="virtuaisol" telegramGroup="virtuportal" />
           </div>
         </div>
 
