@@ -9,7 +9,7 @@ interface SocialLinksProps {
 
 export function SocialLinks({ 
   xUsername = "virtuaisol", 
-  telegramGroup = "virtuaisol" 
+  telegramGroup = "VirtuPortal" 
 }: SocialLinksProps) {
   return (
     <div className="flex gap-4 items-center justify-center">
